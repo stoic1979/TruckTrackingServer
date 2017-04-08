@@ -234,6 +234,18 @@ function handleGetDriversOverview() {
     echo getDriversForAdmin($_POST["admin_id"]);
 }
 
+function setDriverStatus($op, $did, $val) {
+    $ret = array('op' => $op, 'msg' => 'Driver Status Changed Successfully', 'error_code' => '0');
+    $result = mysql_query("update driver set active=$val where id=$did");
+
+    if($result) {}
+    else {
+        $ret["error_code"] = 1;
+        $ret["msg"] = "Failed to change driver status";
+    }
+    return json_encode($ret);
+}
+
 //////////////////////////////////////////////////////
 //                                                  //
 //       Api for getting drivers locations          //
@@ -328,6 +340,8 @@ if($op == "driver_login")           handleDriverLogin();
 if($op == "add_driver_location")    handleAddDriverLocation();
 if($op == "get_drivers_ovreview")   handleGetDriversOverview();
 if($op == "get_driver_locations")   handleGetDriverLocations();
+if($op == "activate_driver")        setDriverStatus($op, $_POST["did"], 1);
+if($op == "deactivate_driver")      setDriverStatus($op, $_POST["did"], 0);
 
 //-------------------------------------
 // UNUSED APIs
