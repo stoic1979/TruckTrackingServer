@@ -35,7 +35,7 @@ function didExists($did){
 //////////////////////////////////////////////////////
 
 function adminIdExists($admin_id){
-    $qry = "SELECT admin_id FROM admin WHERE admin_id=$admin_id";	
+    $qry = "SELECT id FROM admin WHERE id=$admin_id";	
     $result = mysql_query($qry);
     return mysql_num_rows($result) >= 1;
 }
