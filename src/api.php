@@ -28,73 +28,6 @@ function didExists($did){
 	return mysql_num_rows($result) >= 1;
 }
 
-//////////////////////////////////////////////////////
-//                                                  //
-//            Check if license plate exists         //
-//                                                  //
-//////////////////////////////////////////////////////
-
-function licensePlateExists($license_plate_num){
-	$qry = "SELECT license_plate_num FROM license_plate WHERE license_plate_num='$license_plate_num'";	
-	$result = mysql_query($qry);
-	
-	return mysql_num_rows($result) >= 1;
-}
-
-
-//////////////////////////////////////////////////////
-//                                                  //
-// function to add license plate information in db  //
-//                                                  //
-//////////////////////////////////////////////////////
-function AddLicensePlateInfo($user_id, $license_plate_num, $license_plate_state, $advertised_location, $make, $model, $color, $year, $vin, $needs) {
-
-  // upload the license plate image in data folder
-
-  $ret = array('error' => 0, 'msg' => '');
-
-  // ensure that license plate does not exist
-  if(licensePlateExists($license_plate_num) ){	
-		$ret["error_code"] = 1;
-       	$ret["msg"]        = "License plate already exists";	
-        die( json_encode($ret) );
-
-  }
-
-  // timestamp !
-  $t = time();
-
-  // getting file name, type and extension
-  $tmpFilePath = $_FILES['license_file']['name'];
-  
-  // getting file extension
-  $ext = end( (explode(".", $tmpFilePath)) );
-  $file_name = $user_id . "_" . $t . "." . $ext;	
-  
-  // destination path
-  $target_file = "data/".  $file_name;
-
-  // uploading file into data folder
-  $res = move_uploaded_file($_FILES['license_file']['tmp_name'], $target_file);
-
-  // making query
-  $query = "INSERT INTO license_plate";
-  $query = $query . "(`user_id`,`license_plate_num`,`license_plate_state`,`advertised_location`,`make`,`model`,`color`,`year`,`vin`,`needs`,`license_file`)";
-  $query = $query . " VALUES('$user_id', '$license_plate_num','$license_plate_state','$advertised_location','$make','$model','$color','$year', '$vin', '$needs', '$file_name')";
-
-  // echo $query . "<br>";
-
-  // executing query
-  $result = mysql_query($query);
-			
-  if ($result > 0) {
-	 $ret["msg"] = "License plate added successfully";	
-	 echo json_encode($ret);
-     return mysql_insert_id();
-  }
-
-  return 0;						 	 
-}
 
 //////////////////////////////////////////////////////
 //                                                  //
@@ -118,9 +51,6 @@ function getAllLicensePlates($index) {
 
     return json_encode($plates);
 }
-
-
-
 
 //////////////////////////////////////////////////////
 //                                                  //
