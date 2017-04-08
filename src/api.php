@@ -263,7 +263,7 @@ function getDriverLocations($did) {
     }
 
     // fetching drivers' locations
-    $result = mysql_query("select * from location where did=$did");
+    $result = mysql_query("select * from location where did=$did ORDER BY id DESC");
 
     $locations = array();
     while( $row = mysql_fetch_assoc($result) ) {
