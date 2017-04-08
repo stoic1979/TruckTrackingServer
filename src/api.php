@@ -243,7 +243,7 @@ function setDriverStatus($op, $did, $val) {
         $ret["error_code"] = 1;
         $ret["msg"] = "Failed to change driver status";
     }
-    return json_encode($ret);
+    echo json_encode($ret);
 }
 
 //////////////////////////////////////////////////////
