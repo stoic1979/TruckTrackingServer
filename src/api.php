@@ -210,6 +210,20 @@ function handleAddDriverLocation(){
     echo json_encode($ret);
 }
 
+function getDriversForAdmin($admin_id) {
+    $result = mysql_query("select * from did where admin_id=$admin_id");
+
+    $drivers = array();
+    while( $row = mysql_fetch_assoc($result) ) {
+        $drivers[] = $row;
+    }
+    return json_encode($drivers);
+}
+
+function handleGetDriversOverview() {
+    echo getDriversForAdmin($_POST["admin_id"]);
+}
+
 //////////////////////////////////////////////////////
 //                                                  //
 //       Api for add plate                          //
@@ -275,6 +289,7 @@ $op = $_POST["op"];
 if($op == "admin_login")            handleAdminLogin();
 if($op == "driver_login")           handleDriverLogin();
 if($op == "add_driver_location")    handleAddDriverLocation();
+if($op == "get_drivers_ovreview")   handleGetDriversOverview();
 
 //-------------------------------------
 // UNUSED APIs
@@ -283,4 +298,5 @@ if($op == "register")      handleRegister();
 if($op == "add_plate")     handleAddLicensePlate();
 if($op == "get_plates")    handleGetPlates();
 if($op == "get_max_plate") handleGetMaxPlate();
+
 ?>
