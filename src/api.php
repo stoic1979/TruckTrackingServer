@@ -251,7 +251,9 @@ function handleAddDriverLocation(){
     # ToDO
     # ensure that 'did' is valid
 
-    $result = mysql_query("INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES('$did', '$lat', '$lng','$ts')");
+    $query = "INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES('$did', '$lat', '$lng','$ts')";
+    echo $query . "<br>";
+    $result = mysql_query($query);
 
     if (! ($result > 0) ) {																									
         $ret["error"] = 1
