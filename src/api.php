@@ -210,7 +210,7 @@ function handleAddDriverLocation(){
 //////////////////////////////////////////////////////
 
 function getDriversForAdmin($admin_id) {
-    $ret = array('op' => 'get_drivers_ovreview', 'msg' => 'Got Drivers Overview Successfully', 'error_code' => '0');
+    $ret = array('op' => 'get_drivers_overview', 'msg' => 'Got Drivers Overview Successfully', 'error_code' => '0');
 
     // ensuring admin id
     if(!adminIdExists($admin_id)) {
@@ -232,6 +232,37 @@ function getDriversForAdmin($admin_id) {
 
 function handleGetDriversOverview() {
     echo getDriversForAdmin($_POST["admin_id"]);
+}
+
+//////////////////////////////////////////////////////
+//                                                  //
+//       Api for getting drivers locations          //
+//                                                  //
+//////////////////////////////////////////////////////
+
+function getDriversForAdmin($did) {
+    $ret = array('op' => 'get_drivers_locations', 'msg' => 'Got Drivers Locations Successfully', 'error_code' => '0');
+
+    // ensuring admin id
+    if(!didExists($did)) {
+        $ret["error_code"] = 1;
+        $ret["msg"] = "Invalid driver id";
+        return json_encode($ret);
+    }
+
+    // fetching drivers' locations
+    $result = mysql_query("select * from location where did=$did");
+
+    $locations = array();
+    while( $row = mysql_fetch_assoc($result) ) {
+        $locations[] = $row;
+    }
+    $ret["locations"] = $locations;
+    return json_encode($ret);
+}
+
+function handleGetDriverLocations() {
+    echo getDriversForAdmin($_POST["did"]);
 }
 
 //////////////////////////////////////////////////////
@@ -296,6 +327,7 @@ if($op == "admin_login")            handleAdminLogin();
 if($op == "driver_login")           handleDriverLogin();
 if($op == "add_driver_location")    handleAddDriverLocation();
 if($op == "get_drivers_ovreview")   handleGetDriversOverview();
+if($op == "get_driver_locations")   handleGetDriverLocations();
 
 //-------------------------------------
 // UNUSED APIs
