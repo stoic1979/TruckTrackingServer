@@ -174,7 +174,7 @@ function handleRegister(){
 //////////////////////////////////////////////////////
 function handleAdminLogin(){
 
-	$ret = array('uid' => '0', 'email' => '0', 'op' => 'login', 'msg'=> 'Login Successful', 'error_code'=> '0');
+	$ret = array('uid' => '0', 'email' => '0', 'op' => 'admin_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
 
     // reading posted params
 	$username = $_POST['username'];
@@ -214,7 +214,7 @@ function handleAdminLogin(){
 //////////////////////////////////////////////////////
 function handleDriverLogin(){
 
-	$ret = array('uid' => '0', 'email' => '0', 'op' => 'login', 'msg'=> 'Login Successful', 'error_code'=> '0');
+	$ret = array('uid' => '0', 'email' => '0', 'op' => 'driver_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
 
     // reading posted params
 	$username = $_POST['username'];
