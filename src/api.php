@@ -251,16 +251,17 @@ function handleAddDriverLocation(){
     # ToDO
     # ensure that 'did' is valid
 
-    $query = "INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES('$did', '$lat', '$lng','$ts')";
-    echo $query . "<br>";
+    $query = "INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES($did, $lat, $lng,$ts)";
     $result = mysql_query($query);
 
-    if (! ($result > 0) ) {																									
-        $ret["error"] = 1
-            $ret["msg"] = "Failed to add driver locaiton"
-            // creating some data that will be the JSON response
-    } 
+    if ($result > 0) {}
+    else {
+        $ret["error_code"] = 1;
+        $ret["msg"] = "Failed to add driver locaiton";
+        // creating some data that will be the JSON response
+    }
     echo json_encode($ret);
+
 }
 
 //////////////////////////////////////////////////////
