@@ -205,14 +205,14 @@ function handleAddDriverLocation(){
 function getDriversForAdmin($admin_id) {
     $ret = array('op' => 'get_drivers_ovreview', 'msg' => 'Got Drivers Overview Successfully', 'error_code' => '0');
 
-    # ensuring admin id
+    // ensuring admin id
     if(!adminIdExists($admin_id)) {
         $ret["error_code"] = 1;
         $ret["msg"] = "Invalid admin id";
         return json_encode($ret);
     }
 
-    # fetching drivers' overview data
+    // fetching drivers' overview data
     $result = mysql_query("select * from driver where admin_id=$admin_id");
 
     $drivers = array();
