@@ -157,7 +157,7 @@ function handleRegister(){
 
 //////////////////////////////////////////////////////
 //                                                  //
-//       Api for user login                         //
+//       Api for admin login                         //
 //                                                  //
 //////////////////////////////////////////////////////
 function handleAdminLogin(){
@@ -185,6 +185,45 @@ function handleAdminLogin(){
 
 	if($login_ok){
 		$ret['uid'] = $uid;
+		$ret['email'] = $email;
+        echo json_encode($ret);
+	}else{
+	    $ret["error_code"] = 1;
+	    $ret["msg"]        = "Invalid Credentials!";
+	    
+	    die( json_encode($ret) );
+	}
+}
+
+//////////////////////////////////////////////////////
+//                                                  //
+//       Api for driver login                         //
+//                                                  //
+//////////////////////////////////////////////////////
+function handleDriverLogin(){
+
+	$ret = array('uid' => '0', 'email' => '0', 'op' => 'login', 'msg'=> 'Login Successful', 'error_code'=> '0');
+
+    // reading posted params
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$phone_no = $_POST['phone_no'];
+
+	$qry = "SELECT * FROM driver WHERE username='$username' AND password='$password' AND phone_no='$phone_no'";	
+	$result = mysql_query($qry);
+	
+	$row = mysql_fetch_assoc($result);
+	$did = $row['id'];
+	$email = $row['email'];
+
+	if($result) {
+		if(mysql_num_rows($result) > 0) {	
+			$login_ok = true;
+		}
+	}
+
+	if($login_ok){
+		$ret['did'] = $did;
 		$ret['email'] = $email;
         echo json_encode($ret);
 	}else{
@@ -258,6 +297,7 @@ $op = $_POST["op"];
 
 // api request handlers for various operations
 if($op == "admin_login")   handleAdminLogin();
+if($op == "driver_login")  handleDriverLogin();
 if($op == "register")      handleRegister();
 if($op == "add_plate")     handleAddLicensePlate();
 if($op == "get_plates")    handleGetPlates();
