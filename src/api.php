@@ -210,6 +210,7 @@ function handleDriverLogin(){
 	$phone_no = $_POST['phone_no'];
 
 	$qry = "SELECT * FROM driver WHERE username='$username' AND password='$password' AND phone_no='$phone_no'";	
+        echo $qry . "<br>";
 	$result = mysql_query($qry);
 	
 	$row = mysql_fetch_assoc($result);
