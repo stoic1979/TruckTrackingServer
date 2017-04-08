@@ -10,10 +10,10 @@ include("database.config.php");
 //////////////////////////////////////////////////////
 
 function userExists($username){
-	$qry = "SELECT username FROM user WHERE username='$username'";	
-	$result = mysql_query($qry);
-	
-	return mysql_num_rows($result) >= 1;
+    $qry = "SELECT username FROM user WHERE username='$username'";	
+    $result = mysql_query($qry);
+
+    return mysql_num_rows($result) >= 1;
 }
 
 //////////////////////////////////////////////////////
@@ -23,9 +23,9 @@ function userExists($username){
 //////////////////////////////////////////////////////
 
 function didExists($did){
-	$qry = "SELECT did FROM driver WHERE did=$did";	
-	$result = mysql_query($qry);
-	return mysql_num_rows($result) >= 1;
+    $qry = "SELECT did FROM driver WHERE did=$did";	
+    $result = mysql_query($qry);
+    return mysql_num_rows($result) >= 1;
 }
 
 
@@ -38,12 +38,12 @@ function didExists($did){
 function getAllLicensePlates($index) {
 
 
-	$query = "select * from license_plate where id > $index limit 20";
+    $query = "select * from license_plate where id > $index limit 20";
 
-	//echo $query . "<br>";
+    //echo $query . "<br>";
 
-	$result = mysql_query($query);
-	
+    $result = mysql_query($query);
+
     $plates = array();
     while( $row = mysql_fetch_assoc($result) ) {
         $plates[] = $row;
@@ -60,40 +60,40 @@ function getAllLicensePlates($index) {
 
 function handleRegister(){
 
-	$ret = array('op' => 'register', 'msg' => 'Registration Successful', 'error_code' => '0');
+    $ret = array('op' => 'register', 'msg' => 'Registration Successful', 'error_code' => '0');
 
-	$username = $_POST['username'];
-	$pass     = $_POST['password'];
-	$email    = $_POST['email'];
+    $username = $_POST['username'];
+    $pass     = $_POST['password'];
+    $email    = $_POST['email'];
 
-	$password = md5($pass . $username);
+    $password = md5($pass . $username);
 
-	// ensuring username and password are specified in request
-	if (empty($_POST['username']) || empty($_POST['password'])){
+    // ensuring username and password are specified in request
+    if (empty($_POST['username']) || empty($_POST['password'])){
 
-		// creating some data that will be the JSON response
-        	$ret["error_code"] = 1;
-       		$ret["msg"]        = "Please Enter Both Username and Password.";
-	        
-		die( json_encode($ret) );
-	}
-		
-	// ensure that username does not exist 
-	if( userExists($username) ){
-    		$ret["error_code"] = 1;
-       		$ret["msg"]        = "Username already exists";	
-                die( json_encode($ret) );
-   	}
-	
-	$result = mysql_query("INSERT INTO user(`username`,`password`,`email`) VALUES('$username', '$password', '$email')");
-			
-	if ($result > 0) {																									
-	// creating some data that will be the JSON response
+        // creating some data that will be the JSON response
+        $ret["error_code"] = 1;
+        $ret["msg"]        = "Please Enter Both Username and Password.";
+
+        die( json_encode($ret) );
+    }
+
+    // ensure that username does not exist 
+    if( userExists($username) ){
+        $ret["error_code"] = 1;
+        $ret["msg"]        = "Username already exists";	
+        die( json_encode($ret) );
+    }
+
+    $result = mysql_query("INSERT INTO user(`username`,`password`,`email`) VALUES('$username', '$password', '$email')");
+
+    if ($result > 0) {																									
+        // creating some data that will be the JSON response
         echo json_encode($ret);
-	} else {
+    } else {
 
-		// some unknow error, fix me later !!!!
-	}
+        // some unknow error, fix me later !!!!
+    }
 }// handleRegister
 
 
@@ -104,37 +104,37 @@ function handleRegister(){
 //////////////////////////////////////////////////////
 function handleAdminLogin(){
 
-	$ret = array('uid' => '0', 'email' => '0', 'op' => 'admin_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
+    $ret = array('uid' => '0', 'email' => '0', 'op' => 'admin_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
 
     // reading posted params
-	$username = $_POST['username'];
-	//$pass     = $_POST['password'];
-	//$password = md5($pass . $username);
-	$password   = $_POST['password'];
+    $username = $_POST['username'];
+    //$pass     = $_POST['password'];
+    //$password = md5($pass . $username);
+    $password   = $_POST['password'];
 
-	$qry = "SELECT * FROM admin WHERE username='$username' AND password='$password'";	
-	$result = mysql_query($qry);
-	
-	$row = mysql_fetch_assoc($result);
-	$uid = $row['id'];
-	$email = $row['email'];
+    $qry = "SELECT * FROM admin WHERE username='$username' AND password='$password'";	
+    $result = mysql_query($qry);
 
-	if($result) {
-		if(mysql_num_rows($result) > 0) {	
-			$login_ok = true;
-		}
-	}
+    $row = mysql_fetch_assoc($result);
+    $uid = $row['id'];
+    $email = $row['email'];
 
-	if($login_ok){
-		$ret['uid'] = $uid;
-		$ret['email'] = $email;
+    if($result) {
+        if(mysql_num_rows($result) > 0) {	
+            $login_ok = true;
+        }
+    }
+
+    if($login_ok){
+        $ret['uid'] = $uid;
+        $ret['email'] = $email;
         echo json_encode($ret);
-	}else{
-	    $ret["error_code"] = 1;
-	    $ret["msg"]        = "Invalid Credentials!";
-	    
-	    die( json_encode($ret) );
-	}
+    }else{
+        $ret["error_code"] = 1;
+        $ret["msg"]        = "Invalid Credentials!";
+
+        die( json_encode($ret) );
+    }
 }
 
 //////////////////////////////////////////////////////
@@ -144,36 +144,36 @@ function handleAdminLogin(){
 //////////////////////////////////////////////////////
 function handleDriverLogin(){
 
-	$ret = array('uid' => '0', 'email' => '0', 'op' => 'driver_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
+    $ret = array('uid' => '0', 'email' => '0', 'op' => 'driver_login', 'msg'=> 'Login Successful', 'error_code'=> '0');
 
     // reading posted params
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$phone_no = $_POST['phone_no'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $phone_no = $_POST['phone_no'];
 
-	$qry = "SELECT * FROM driver WHERE username='$username' AND password='$password' AND phone_no='$phone_no'";	
-	$result = mysql_query($qry);
-	
-	$row = mysql_fetch_assoc($result);
-	$did = $row['id'];
-	$email = $row['email'];
+    $qry = "SELECT * FROM driver WHERE username='$username' AND password='$password' AND phone_no='$phone_no'";	
+    $result = mysql_query($qry);
 
-	if($result) {
-		if(mysql_num_rows($result) > 0) {	
-			$login_ok = true;
-		}
-	}
+    $row = mysql_fetch_assoc($result);
+    $did = $row['id'];
+    $email = $row['email'];
 
-	if($login_ok){
-		$ret['did'] = $did;
-		$ret['email'] = $email;
+    if($result) {
+        if(mysql_num_rows($result) > 0) {	
+            $login_ok = true;
+        }
+    }
+
+    if($login_ok){
+        $ret['did'] = $did;
+        $ret['email'] = $email;
         echo json_encode($ret);
-	}else{
-	    $ret["error_code"] = 1;
-	    $ret["msg"]        = "Invalid Credentials!";
-	    
-	    die( json_encode($ret) );
-	}
+    }else{
+        $ret["error_code"] = 1;
+        $ret["msg"]        = "Invalid Credentials!";
+
+        die( json_encode($ret) );
+    }
 }
 
 //////////////////////////////////////////////////////
@@ -217,44 +217,44 @@ function handleAddDriverLocation(){
 //////////////////////////////////////////////////////
 
 function handleAddLicensePlate(){
-	$user_id             = $_POST['user_id'];
-	$license_plate_num   = $_POST['license_plate_num'];
-	$license_plate_state = $_POST['license_plate_state'];
-	$advertised_location = $_POST['advertised_location'];
-	$make 				 = $_POST['make'];
-	$model 				 = $_POST['model'];
-	$color 				 = $_POST['color'];
+    $user_id             = $_POST['user_id'];
+    $license_plate_num   = $_POST['license_plate_num'];
+    $license_plate_state = $_POST['license_plate_state'];
+    $advertised_location = $_POST['advertised_location'];
+    $make 				 = $_POST['make'];
+    $model 				 = $_POST['model'];
+    $color 				 = $_POST['color'];
 
-	//---------------------------
-	// checking optional fields
-	//---------------------------
-	$year = 0;
-	if(isset($_POST['year'])) {
-		if(isset($_POST['year']) == "")  $year = 0;
-		else                             $year = $_POST['year'];
-	}
+    //---------------------------
+    // checking optional fields
+    //---------------------------
+    $year = 0;
+    if(isset($_POST['year'])) {
+        if(isset($_POST['year']) == "")  $year = 0;
+        else                             $year = $_POST['year'];
+    }
 
-	$vin = "Unknown";
-	if(isset($_POST['vin'])) {
-		$vin = $_POST['vin'];
-	}
+    $vin = "Unknown";
+    if(isset($_POST['vin'])) {
+        $vin = $_POST['vin'];
+    }
 
-	$needs = "None";
-	if(isset($_POST['needs'])) {
-		$needs = $_POST['needs'];
-	}
+    $needs = "None";
+    if(isset($_POST['needs'])) {
+        $needs = $_POST['needs'];
+    }
 
-	// saving license plate information
+    // saving license plate information
     AddLicensePlateInfo($user_id, $license_plate_num, $license_plate_state, $advertised_location, $make, $model, $color, $year, $vin, $needs);
 }
 
 function handleGetPlates() {
-	echo getAllLicensePlates($_POST['index']);
+    echo getAllLicensePlates($_POST['index']);
 }
 
 function handleGetMaxPlate() {
-	$ret = array("max_id" => 0);
-	$result = mysql_query("SELECT MAX(id) FROM license_plate");
+    $ret = array("max_id" => 0);
+    $result = mysql_query("SELECT MAX(id) FROM license_plate");
     $row = mysql_fetch_row($result);
     $ret["max_id"] = $row[0];
     echo json_encode($ret);
