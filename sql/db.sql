@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2017 at 07:35 AM
+-- Generation Time: Apr 08, 2017 at 10:47 AM
 -- Server version: 5.6.32-78.1-log
 -- PHP Version: 5.6.20
 
@@ -60,6 +60,30 @@ CREATE TABLE IF NOT EXISTS `driver` (
   `license_no` varchar(32) NOT NULL,
   `aadhar_no` varchar(64) NOT NULL,
   `active` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `driver`
+--
+
+INSERT INTO `driver` (`id`, `username`, `password`, `fname`, `lname`, `email`, `from_loc`, `to_loc`, `vehicle_no`, `phone_no`, `license_no`, `aadhar_no`, `active`) VALUES
+(1, 'gopal', 'g123', '', '', '', '', '', '', '9988776655', '', '', 0),
+(3, 'shamsher', 's123', '', '', '', '', '', '', '9876543210', '', '', 0),
+(4, 'deepak', 'd123', '', '', '', '', '', '', '9898986666', '', '', 0),
+(5, 'suraj', 's123', '', '', '', '', '', '', '8899776612', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` bigint(20) NOT NULL,
+  `did` int(11) NOT NULL,
+  `lat` double NOT NULL,
+  `lng` double NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -79,6 +103,12 @@ ALTER TABLE `driver`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -91,7 +121,12 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
