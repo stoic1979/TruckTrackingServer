@@ -166,8 +166,9 @@ function handleAdminLogin(){
 
     // reading posted params
 	$username = $_POST['username'];
-	$pass     = $_POST['password'];
-	$password = md5($pass . $username);
+	//$pass     = $_POST['password'];
+	//$password = md5($pass . $username);
+	$password   = $_POST['password'];
 
 	$qry = "SELECT * FROM admin WHERE username='$username' AND password='$password'";	
 	$result = mysql_query($qry);
