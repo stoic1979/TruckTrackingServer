@@ -92,6 +92,35 @@
 
 <br><br>
 
+<b>Add Driver's Trip</b> <br><hr>
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="add_trip"/></td>
+        <tr>
+            <td> Driver Id </td>
+            <td><input type = "text" name = "did" /></td>
+        </tr>
+        <tr>
+            <td> From Location </td>
+            <td><input type="text" name="from_loc" /></td>
+        </tr>
+        <tr>
+            <td> To Location </td>
+            <td><input type="text" name="to_loc" /></td>
+        </tr>
+        <tr>
+            <td> Timestamp </td>
+            <td><input type="text" name="ts" /></td>
+        </tr>
+
+        <tr colspan = "2">
+            <th><input type="submit" value= "Add Trip"  /></th>
+        </tr>
+    </table>
+</form>
+
+<br><br>
+
 <b>Get Driver Locations</b> <br><hr>
 <form method="POST" action="api.php">
     <table cellspacing="5" cellpadding="5">

@@ -166,6 +166,41 @@ function handleDriverLogin(){
 
 //////////////////////////////////////////////////////
 //                                                  //
+//       Api for driver's trip                      //
+//                                                  //
+//////////////////////////////////////////////////////
+function handleAddTrip(){
+
+    $ret = array('op' => 'add_trip', 'msg'=> 'Trip added successfully', 'error_code'=> '0');
+
+    $did      = $_POST['did'];
+    $from_loc = $_POST['from_loc'];
+    $to_loc   = $_POST['to_loc'];
+    $ts       = $_POST['ts'];
+
+    // ensuring that 'did' is valid
+    if(!didExists($did)) {
+        $ret["error_code"] = 2;
+        $ret["msg"] = "Driver id does not exist";
+        echo json_encode($ret);
+        return;
+    }
+
+    // writing driver's location in db
+    $query = "INSERT INTO trip(`did`,`from_loc`,`to_loc`,`ts`) VALUES($did, $from_loc, $to_loc, $ts)";
+    $result = mysql_query($query);
+
+    if ($result > 0) {}
+    else {
+        $ret["error_code"] = 1;
+        $ret["msg"] = "Failed to add trip";
+    }
+
+    echo json_encode($ret);
+}
+
+//////////////////////////////////////////////////////
+//                                                  //
 //       Api for add driver location                //
 //                                                  //
 //////////////////////////////////////////////////////
@@ -338,6 +373,7 @@ $op = $_POST["op"];
 if($op == "admin_login")            handleAdminLogin();
 if($op == "driver_login")           handleDriverLogin();
 if($op == "add_driver_location")    handleAddDriverLocation();
+if($op == "add_trip")               handleAddTrip();
 if($op == "get_drivers_ovreview")   handleGetDriversOverview();
 if($op == "get_driver_locations")   handleGetDriverLocations();
 if($op == "activate_driver")        setDriverStatus($op, $_POST["did"], 1);
