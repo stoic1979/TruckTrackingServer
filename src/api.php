@@ -195,6 +195,10 @@ function handleAddDriverLocation(){
         $ret["error_code"] = 1;
         $ret["msg"] = "Failed to add driver locaiton";
     }
+
+    # updating drivers last location and timestamp
+    mysql_query("update driver set last_loc=$lat,last_lng=$lng,last_ts=$ts where did=$did)";
+
     echo json_encode($ret);
 }
 
