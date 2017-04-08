@@ -47,6 +47,37 @@
 
 <br><br>
 
+<b>Add Driver Location </b> <br><hr>
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="add_driver_location"/></td>
+        <tr>
+            <td> Driver Id </td>
+            <td><input type = "text" name = "did" /></td>
+        </tr>
+        <tr>
+            <td> Latitude </td>
+            <td><input type="text" name="lat" /></td>
+        </tr>
+        <tr>
+            <td> Longitude </td>
+            <td><input type="text" name="lng" /></td>
+        </tr>
+        <tr>
+            <td> Timestamp </td>
+            <td><input type="text" name="ts" /></td>
+        </tr>
+        <tr colspan = "2">
+            <th><input type="submit" value= "Add Driver Location"  /></th>
+        </tr>
+    </table>
+</form>
+
+<br><br>
+
+
+<hr>
+<br><br>
 
 <b>Register User</b> <br /><hr />
 <form method="POST" action="api.php">
