@@ -18,7 +18,7 @@ function userExists($username){
 
 //////////////////////////////////////////////////////
 //                                                  //
-//            Check did exist on not                //
+//            Check 'did' exist on not              //
 //                                                  //
 //////////////////////////////////////////////////////
 
@@ -27,6 +27,19 @@ function didExists($did){
     $result = mysql_query($qry);
     return mysql_num_rows($result) >= 1;
 }
+
+//////////////////////////////////////////////////////
+//                                                  //
+//            Check 'admin_id' exist on not         //
+//                                                  //
+//////////////////////////////////////////////////////
+
+function adminIdExists($admin_id){
+    $qry = "SELECT admin_id FROM admin WHERE admin_id=$admin_id";	
+    $result = mysql_query($qry);
+    return mysql_num_rows($result) >= 1;
+}
+
 
 
 //////////////////////////////////////////////////////
@@ -211,12 +224,22 @@ function handleAddDriverLocation(){
 }
 
 function getDriversForAdmin($admin_id) {
+    $ret = array('op' => 'get_drivers_ovreview', 'msg' => 'Got Drivers Overview Successfully', 'error_code' => '0');
+
+    # ensuring admin id
+    if(!adminIdExists($admin_id) {
+        $ret["error_code"] = 1;
+        $ret["msg"] = "Invalid admin id";
+    }
+
+    # fetching drivers' overview data
     $result = mysql_query("select * from driver where admin_id=$admin_id");
 
     $drivers = array();
     while( $row = mysql_fetch_assoc($result) ) {
         $drivers[] = $row;
     }
+    $ret["drivers"] = $drivers;
     return json_encode($drivers);
 }
 
