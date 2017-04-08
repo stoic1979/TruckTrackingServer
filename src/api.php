@@ -230,6 +230,7 @@ function getDriversForAdmin($admin_id) {
     if(!adminIdExists($admin_id)) {
         $ret["error_code"] = 1;
         $ret["msg"] = "Invalid admin id";
+        return json_encode($ret);
     }
 
     # fetching drivers' overview data
@@ -240,7 +241,7 @@ function getDriversForAdmin($admin_id) {
         $drivers[] = $row;
     }
     $ret["drivers"] = $drivers;
-    return json_encode($drivers);
+    return json_encode($ret);
 }
 
 function handleGetDriversOverview() {
