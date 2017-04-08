@@ -258,10 +258,8 @@ function handleAddDriverLocation(){
     else {
         $ret["error_code"] = 1;
         $ret["msg"] = "Failed to add driver locaiton";
-        // creating some data that will be the JSON response
     }
     echo json_encode($ret);
-
 }
 
 //////////////////////////////////////////////////////
