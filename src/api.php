@@ -240,7 +240,7 @@ function handleGetDriversOverview() {
 //                                                  //
 //////////////////////////////////////////////////////
 
-function getDriversForAdmin($did) {
+function getDriverLocations($did) {
     $ret = array('op' => 'get_drivers_locations', 'msg' => 'Got Drivers Locations Successfully', 'error_code' => '0');
 
     // ensuring admin id
@@ -262,7 +262,7 @@ function getDriversForAdmin($did) {
 }
 
 function handleGetDriverLocations() {
-    echo getDriversForAdmin($_POST["did"]);
+    echo getDriverLocations($_POST["did"]);
 }
 
 //////////////////////////////////////////////////////
