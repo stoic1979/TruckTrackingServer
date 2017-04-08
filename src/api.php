@@ -187,7 +187,7 @@ function handleAddTrip(){
     }
 
     // writing driver's location in db
-    $query = "INSERT INTO trip(`did`,`from_loc`,`to_loc`,`ts`) VALUES($did, $from_loc, $to_loc, $ts)";
+    $query = "INSERT INTO trip(`did`,`from_loc`,`to_loc`,`ts`) VALUES($did, '$from_loc', '$to_loc', $ts)";
     $result = mysql_query($query);
 
     if ($result > 0) {}
