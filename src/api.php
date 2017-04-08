@@ -211,7 +211,7 @@ function handleAddDriverLocation(){
 }
 
 function getDriversForAdmin($admin_id) {
-    $result = mysql_query("select * from did where admin_id=$admin_id");
+    $result = mysql_query("select * from driver where admin_id=$admin_id");
 
     $drivers = array();
     while( $row = mysql_fetch_assoc($result) ) {
