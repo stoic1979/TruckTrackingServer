@@ -197,7 +197,7 @@ function handleAdminLogin(){
 
 //////////////////////////////////////////////////////
 //                                                  //
-//       Api for driver login                         //
+//       Api for driver login                       //
 //                                                  //
 //////////////////////////////////////////////////////
 function handleDriverLogin(){
@@ -232,6 +232,33 @@ function handleDriverLogin(){
 	    
 	    die( json_encode($ret) );
 	}
+}
+
+//////////////////////////////////////////////////////
+//                                                  //
+//       Api for add driver location                //
+//                                                  //
+//////////////////////////////////////////////////////
+function handleAddDriverLocation(){
+
+    $ret = array('op' => 'add_driver_location', 'msg'=> 'Location added successfully', 'error_code'=> '0');
+
+    $did = $_POST['did'];
+    $lat = $_POST['lat'];
+    $lng = $_POST['lng'];
+    $ts  = $_POST['ts'];
+
+    # ToDO
+    # ensure that 'did' is valid
+
+    $result = mysql_query("INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES('$did', '$lat', '$lng','$ts')");
+
+    if (! ($result > 0) ) {																									
+        $ret["error"] = 1
+            $ret["msg"] = "Failed to add driver locaiton"
+            // creating some data that will be the JSON response
+    } 
+    echo json_encode($ret);
 }
 
 //////////////////////////////////////////////////////
@@ -296,8 +323,13 @@ if(!isset($_POST["op"]))  die("operation not specified");
 $op = $_POST["op"];
 
 // api request handlers for various operations
-if($op == "admin_login")   handleAdminLogin();
-if($op == "driver_login")  handleDriverLogin();
+if($op == "admin_login")            handleAdminLogin();
+if($op == "driver_login")           handleDriverLogin();
+if($op == "add_driver_location")    handleAddDriverLocation();
+
+//-------------------------------------
+// UNUSED APIs
+//-------------------------------------
 if($op == "register")      handleRegister();
 if($op == "add_plate")     handleAddLicensePlate();
 if($op == "get_plates")    handleGetPlates();
