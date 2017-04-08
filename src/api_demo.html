@@ -1,0 +1,138 @@
+<html>
+<head></head>
+<body>
+<h1> API Demo Page </h1>
+
+<b>Login </b> <br><hr>
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="login"/></td>
+        <tr>
+            <td> Username </td>
+            <td><input type = "text" name = "username" /></td>
+        </tr>
+        <tr>
+            <td> Password </td>
+            <td><input type="password" name="password" /></td>
+        </tr>
+        <tr colspan = "2">
+            <th><input type="submit" value= "Login"  /></th>
+        </tr>
+    </table>
+</form>
+
+<br><br>
+
+
+<b>Register User</b> <br /><hr />
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="register"/></td>
+        <tr>
+            <td> Username </td>
+            <td><input type = "text" name = "username" /></td>
+        </tr>
+        <tr>
+            <td> password</td>
+            <td><input type = "password" name = "password" /></td>
+        </tr>
+        <tr>
+            <td> Email</td>
+            <td><input type="text" name="email" /></td>
+        </tr>
+
+        <tr colspan = "2">
+            <th><input type="submit" value= "Register"  /></th>
+        </tr>
+    </table>
+</form>
+<br><br>
+<b>Add License Plate</b> <br /><hr />
+<form method="POST" action="api.php"  enctype="multipart/form-data">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="add_plate"/></td>
+        <tr>
+            <td>User Id:</td>
+            <td><input type = "text" name="user_id" /></td>
+        </tr>
+        <tr>
+            <td>License Plate #</td>
+            <td><input type = "text" name="license_plate_num" /></td>
+        </tr>
+        <tr>
+            <td>License Plate State</td>
+            <td><input type="text" name="license_plate_state" /></td>
+        </tr>
+		<tr>
+            <td>Location Where Advertised</td>
+            <td><input type="text" name="advertised_location" /></td>
+        </tr>
+		<tr>
+            <td>Make</td>
+            <td><input type="text" name="make" /></td>
+        </tr>
+		<tr>
+            <td>Model</td>
+            <td><input type="text" name="model" /></td>
+        </tr>
+		<tr>
+            <td>Color</td>
+            <td><input type="text" name="color" /></td>
+        </tr>
+		<tr>
+            <td>Year</td>
+            <td><input type="text" name="year" /></td>
+        </tr>
+		<tr>
+            <td>Vin</td>
+            <td><input type="text" name="vin" /></td>
+        </tr>
+        <tr>
+            <td>Needs</td>
+            <td><input type="text" name="needs" /></td>
+        </tr>
+		<tr>
+            <td>License Plate Image</td>
+            <td><input type="file" name="license_file" value="file"></p></td>
+        </tr>
+        <tr colspan = "2">
+            <th><input type="submit" value= "Add License Plate"  /></th>
+        </tr>
+    </table>
+</form>
+<br><br>
+
+<b>Get License Plates </b> <br><hr>
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="get_plates"/></td>
+        <tr>
+            <td> Index </td>
+            <td><input type = "text" name = "index" /></td>
+        </tr>
+        <tr colspan = "2">
+            <th><input type="submit" value= "Get Plates"  /></th>
+        </tr>
+    </table>
+</form>
+
+<br><br>
+
+<b>Get Max Id Of Plate </b> <br><hr>
+<form method="POST" action="api.php">
+    <table cellspacing="5" cellpadding="5">
+            <input type="hidden" name="op" value="get_max_plate"/></td>
+      
+        <tr colspan = "2">
+            <th><input type="submit" value= "Get Max Plate Id"  /></th>
+        </tr>
+    </table>
+</form>
+
+<br><br>
+
+<a href="tables.php" target="_blank">View License Plates</a>
+<br><br>
+</body>
+</html>
+
