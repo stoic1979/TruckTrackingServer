@@ -40,31 +40,6 @@ function adminIdExists($admin_id){
     return mysql_num_rows($result) >= 1;
 }
 
-
-
-//////////////////////////////////////////////////////
-//                                                  //
-//     SYNC function to get all license plates      //
-//     upto synced index in app                     //
-//                                                  //
-//////////////////////////////////////////////////////
-function getAllLicensePlates($index) {
-
-
-    $query = "select * from license_plate where id > $index limit 20";
-
-    //echo $query . "<br>";
-
-    $result = mysql_query($query);
-
-    $plates = array();
-    while( $row = mysql_fetch_assoc($result) ) {
-        $plates[] = $row;
-    }
-
-    return json_encode($plates);
-}
-
 //////////////////////////////////////////////////////
 //                                                  //
 //     Api for new user registration                //
@@ -286,10 +261,6 @@ function handleAddLicensePlate(){
     AddLicensePlateInfo($user_id, $license_plate_num, $license_plate_state, $advertised_location, $make, $model, $color, $year, $vin, $needs);
 }
 
-function handleGetPlates() {
-    echo getAllLicensePlates($_POST['index']);
-}
-
 function handleGetMaxPlate() {
     $ret = array("max_id" => 0);
     $result = mysql_query("SELECT MAX(id) FROM license_plate");
@@ -320,7 +291,6 @@ if($op == "get_drivers_ovreview")   handleGetDriversOverview();
 //-------------------------------------
 if($op == "register")      handleRegister();
 if($op == "add_plate")     handleAddLicensePlate();
-if($op == "get_plates")    handleGetPlates();
 if($op == "get_max_plate") handleGetMaxPlate();
 
 ?>
