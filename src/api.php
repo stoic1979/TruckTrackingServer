@@ -197,7 +197,7 @@ function handleAddDriverLocation(){
     }
 
     // updating drivers last location and timestamp
-    mysql_query("update driver set last_loc=$lat,last_lng=$lng,last_ts=$ts where id=$did)";
+    mysql_query("update driver set last_lat=$lat,last_lng=$lng,last_ts=$ts where id=$did)";
 
     echo json_encode($ret);
 }
