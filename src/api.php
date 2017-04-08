@@ -104,7 +104,7 @@ function handleAdminLogin(){
     $result = mysql_query($qry);
 
     $row = mysql_fetch_assoc($result);
-    $uid = $row['id'];
+    $aid = $row['id'];
     $email = $row['email'];
 
     if($result) {
@@ -114,7 +114,7 @@ function handleAdminLogin(){
     }
 
     if($login_ok){
-        $ret['uid'] = $uid;
+        $ret['aid'] = $aid;
         $ret['email'] = $email;
         echo json_encode($ret);
     }else{
