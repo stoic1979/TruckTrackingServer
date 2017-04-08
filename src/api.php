@@ -23,7 +23,7 @@ function userExists($username){
 //////////////////////////////////////////////////////
 
 function didExists($did){
-    $qry = "SELECT did FROM driver WHERE id=$did";	
+    $qry = "SELECT id FROM driver WHERE id=$did";	
     $result = mysql_query($qry);
     return mysql_num_rows($result) >= 1;
 }
