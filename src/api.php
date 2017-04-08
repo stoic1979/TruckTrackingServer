@@ -178,7 +178,7 @@ function handleAddDriverLocation(){
     $lng = $_POST['lng'];
     $ts  = $_POST['ts'];
 
-    # ensuring that 'did' is valid
+    // ensuring that 'did' is valid
     if(!didExists($did)) {
         $ret["error_code"] = 2;
         $ret["msg"] = "Driver id does not exist";
@@ -186,7 +186,7 @@ function handleAddDriverLocation(){
         return;
     }
 
-    # writing driver's location in db
+    // writing driver's location in db
     $query = "INSERT INTO location(`did`,`lat`,`lng`,`ts`) VALUES($did, $lat, $lng,$ts)";
     $result = mysql_query($query);
 
@@ -196,7 +196,7 @@ function handleAddDriverLocation(){
         $ret["msg"] = "Failed to add driver locaiton";
     }
 
-    # updating drivers last location and timestamp
+    // updating drivers last location and timestamp
     mysql_query("update driver set last_loc=$lat,last_lng=$lng,last_ts=$ts where did=$did)";
 
     echo json_encode($ret);
