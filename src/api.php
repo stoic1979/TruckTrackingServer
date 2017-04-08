@@ -160,7 +160,7 @@ function handleRegister(){
 //       Api for user login                         //
 //                                                  //
 //////////////////////////////////////////////////////
-function handleLogin(){
+function handleAdminLogin(){
 
 	$ret = array('uid' => '0', 'email' => '0', 'op' => 'login', 'msg'=> 'Login Successful', 'error_code'=> '0');
 
@@ -256,7 +256,7 @@ if(!isset($_POST["op"]))  die("operation not specified");
 $op = $_POST["op"];
 
 // api request handlers for various operations
-if($op == "admin_login")   handleLogin();
+if($op == "admin_login")   handleAdminLogin();
 if($op == "register")      handleRegister();
 if($op == "add_plate")     handleAddLicensePlate();
 if($op == "get_plates")    handleGetPlates();
