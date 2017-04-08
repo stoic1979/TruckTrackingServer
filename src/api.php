@@ -202,6 +202,13 @@ function handleAddDriverLocation(){
     echo json_encode($ret);
 }
 
+//////////////////////////////////////////////////////
+//                                                  //
+//       Api for getting drivers overview info for  //
+//       given admin id                             //
+//                                                  //
+//////////////////////////////////////////////////////
+
 function getDriversForAdmin($admin_id) {
     $ret = array('op' => 'get_drivers_ovreview', 'msg' => 'Got Drivers Overview Successfully', 'error_code' => '0');
 
