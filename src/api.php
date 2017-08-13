@@ -287,7 +287,7 @@ function setDriverStatus($op, $did, $val) {
 //                                                  //
 //////////////////////////////////////////////////////
 
-function getDriverLocations($did) {
+function getDriverLocations($did, $id) {
     $ret = array('op' => 'get_drivers_locations', 'msg' => 'Got Drivers Locations Successfully', 'error_code' => '0');
 
     // ensuring admin id
@@ -298,7 +298,7 @@ function getDriverLocations($did) {
     }
 
     // fetching drivers' locations
-    $result = mysql_query("select * from location where did=$did ORDER BY id DESC");
+    $result = mysql_query("select * from location where did=$did and id>$id limit 50");
 
     $locations = array();
     while( $row = mysql_fetch_assoc($result) ) {
@@ -309,7 +309,7 @@ function getDriverLocations($did) {
 }
 
 function handleGetDriverLocations() {
-    echo getDriverLocations($_POST["did"]);
+    echo getDriverLocations($_POST["did"], $_POST["id"]);
 }
 
 //////////////////////////////////////////////////////
